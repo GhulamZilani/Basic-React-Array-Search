@@ -18,8 +18,8 @@ function App() {
   const [searchValue, setSearchValue] = useState("")
   const [isSearch, setIsSearch] = useState(false);
 
-  const search = (e) => {
-    let targetVal = e.target.value
+  const searchHandler = (e) => {
+    let targetVal = e.target.value;
     if(targetVal){
       setIsSearch(true);
       setSearchValue(targetVal)
@@ -38,14 +38,14 @@ function App() {
         id="search-input"
         type="text"
         name="search"
-        value={searchValue}
-        onChange={search}
+        // value={searchValue}
+        onChange={(e) => searchHandler(e)}
       />
       <h2>Results</h2>
       <ul>
 
         {isSearch && names
-          .filter(name => name.match(new RegExp(searchValue, "i")))
+          .filter(name => name.includes(searchValue))
           .map(name => {
             return <li key={name}>{name} </li>
           })}
